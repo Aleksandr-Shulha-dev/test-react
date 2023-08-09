@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  web:
+      stdin_open: true
+      build: .
+      restart: always
+      container_name: web
+      ports:
+        - 80:80
+        - 443:443
