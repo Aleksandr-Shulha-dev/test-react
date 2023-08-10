@@ -1,10 +1,25 @@
 version: "3.8"
 services:
   web:
-      stdin_open: true
-      build: .
-      restart: always
-      container_name: web
-      ports:
-        - 80:80
-        - 443:443
+    stdin_open: true
+    build: .
+    restart: always
+    container_name: web
+    expose:
+      - 8000
+  nginx:
+    container_name: nginx
+    restart: unless-stopped
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email vvsovgykv@gmail.com -d mycapbot.com --agree-tos
