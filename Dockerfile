@@ -13,7 +13,7 @@ RUN npm run build
 
 FROM nginx
 
-# COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 # COPY ./nginx/fullchain.pem /etc/nginx/certs/fullchain.pem
 # COPY ./nginx/privkey.pem /etc/nginx/certs/privkey.pem
 
